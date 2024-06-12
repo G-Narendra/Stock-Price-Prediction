@@ -1,0 +1,55 @@
+Final Report on Stock Price Prediction Project
+Project Overview:
+
+This project focused on predicting the next day's closing price of Google's stock using various machine learning models. The dataset comprised historical stock prices of Google, and the main feature used for prediction was the previous day's closing price.
+
+Steps Undertaken:
+
+Data Loading and Inspection:
+
+The dataset GOOG.csv was loaded into a pandas DataFrame.
+The initial inspection showed typical stock price columns with dates ranging over multiple years.
+Data Preparation:
+
+The 'Date' column was converted to datetime format and set as the index.
+A new feature 'Prev Close' was created to hold the previous day's closing price.
+Rows with missing values were dropped to ensure data consistency.
+Feature and Label Creation:
+
+The feature (X) was set as 'Prev Close' and the label (y) as 'Close'.
+Train-Test Split:
+
+The dataset was split into training (80%) and testing (20%) sets.
+Model Evaluation Function:
+
+A function was defined to fit a model, make predictions, and evaluate the model using MSE and R² metrics.
+Model Development and Evaluation:
+
+Various regression models were developed and evaluated:
+Linear Regression:
+MSE: 3.794
+R²: 0.987
+Decision Tree Regressor:
+MSE: 9.421
+R²: 0.964
+Random Forest Regressor:
+MSE: 3.466
+R²: 0.988
+Support Vector Regressor:
+MSE: 16.420
+R²: 0.934
+LSTM Neural Network:
+MSE: 6.104
+R²: 0.978
+Results:
+
+The Random Forest Regressor model achieved the best performance with the lowest MSE (3.466) and the highest R² (0.988), indicating it is the most accurate model for predicting the next day's closing price of Google's stock.
+The LSTM model also performed well but was slightly less accurate than the Random Forest model.
+Visualization:
+
+A comparison plot of actual vs. predicted stock prices was created to visually assess the performance of each model. The plot showed that the Random Forest and Linear Regression models closely followed the actual stock prices, while the Decision Tree, Support Vector Regressor, and LSTM models had more noticeable deviations.
+
+Conclusion:
+
+The project successfully developed and evaluated multiple machine learning models for stock price prediction. The Random Forest Regressor emerged as the most accurate model, providing robust predictions for the next day's closing price based on the previous day's data. Future work could explore more sophisticated features and longer historical windows to potentially improve prediction accuracy further.
+

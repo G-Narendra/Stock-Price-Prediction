@@ -1,0 +1,50 @@
+Introduction to the Dataset
+The dataset used in this project is related to stock prices of Alphabet Inc. (Google), specifically historical stock prices available in the file GOOG.csv. This dataset includes daily records of various stock-related parameters such as:
+
+Date: The trading date.
+Open: The price at which the stock started trading on a particular day.
+High: The highest price reached by the stock on that day.
+Low: The lowest price reached by the stock on that day.
+Close: The price at which the stock ended trading on that day.
+Adj Close: The closing price adjusted for dividends and stock splits.
+Volume: The number of shares traded on that day.
+This dataset is a typical example used for time series analysis and forecasting tasks, where the goal is to predict future stock prices based on historical data.
+
+Dataset Overview:
+
+File Name: GOOG.csv
+Number of Records: Varies (daily data over multiple years)
+Columns: 7 (Date, Open, High, Low, Close, Adj Close, Volume)
+Project Description
+The main objective of this project is to develop and evaluate various machine learning models to predict the closing price of Google's stock for the next trading day using the previous day's closing price. The project includes the following steps:
+
+Data Loading and Inspection:
+
+Load the stock price data from GOOG.csv.
+Inspect the first few records and understand the data structure.
+Data Preparation:
+
+Convert the 'Date' column to datetime format and set it as the DataFrame index.
+Create a new feature 'Prev Close', which is the previous day's closing price.
+Handle missing values by dropping rows with NaN values.
+Feature and Label Creation:
+
+Use 'Prev Close' as the feature (X) and 'Close' as the label (y).
+Train-Test Split:
+
+Split the data into training and testing sets (80% training, 20% testing).
+Model Evaluation Function:
+
+Define a function to train a model, make predictions, and evaluate the model using mean squared error (MSE) and R-squared (R²) metrics.
+Model Development and Evaluation:
+
+Implement and evaluate various regression models including:
+Linear Regression
+Decision Tree Regressor
+Random Forest Regressor
+Support Vector Regressor
+Long Short-Term Memory (LSTM) Neural Network
+Visualization:
+
+Plot the actual vs. predicted stock prices for visual comparison.
+This comprehensive approach allows us to compare the performance of different models and identify the most accurate one for stock price prediction.
