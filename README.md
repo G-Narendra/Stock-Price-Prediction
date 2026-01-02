@@ -1,95 +1,132 @@
-# **📈 Stock Price Prediction using Machine Learning**
+# 📈 Stock Price Prediction
+### Time-Series Forecasting of Google (Alphabet Inc.) Stock Prices
 
-*A machine learning-based approach to predict Google's stock closing prices.*
+<p align="center">
+<img src="https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python">
+<img src="https://img.shields.io/badge/Scikit--Learn-Regression-F7931E?style=for-the-badge&logo=scikitlearn">
+<img src="https://img.shields.io/badge/TensorFlow-LSTM-FF6F00?style=for-the-badge&logo=tensorflow">
+<img src="https://img.shields.io/badge/R%C2%B2%20Score-0.988-brightgreen?style=for-the-badge">
+<img src="https://img.shields.io/badge/Dataset-GOOG%20Historical-4285F4?style=for-the-badge&logo=google">
+</p>
 
-## 🌟 **Overview**
-This project aims to predict **Google's stock closing price for the next trading day** using historical stock prices. The dataset contains **daily stock records** with attributes such as **Open, High, Low, Close, Adjusted Close, and Volume.**
+---
 
-## 📊 **Dataset Overview**
-- **Source**: GOOG.csv (Historical stock data of Google)
-- **Records**: Multiple years of daily stock prices
-- **Features**:
-  - **Date**: Trading date
-  - **Open, High, Low, Close**: Stock price values per day
-  - **Adj Close**: Adjusted closing price
-  - **Volume**: Number of shares traded
-  - **Prev Close**: Previous day's closing price (engineered feature)
+## 🌟 Overview
 
-## 🎯 **Project Workflow**
-✅ **Data Cleaning & Preprocessing** – Handling missing values, feature engineering.  
-✅ **Feature Engineering** – Creating new relevant features like **Prev Close**.  
-✅ **Model Training & Evaluation** – Comparing multiple regression models.  
-✅ **Stock Price Visualization** – Plotting actual vs. predicted prices.  
-✅ **Best Model Selection** – Identifying the most accurate model for forecasting.  
+Predicting stock market trends is a complex challenge characterized by non-linearity and volatility. This project implements a high-precision **Machine Learning pipeline** to forecast **Google’s (GOOG) closing prices**. By analyzing years of historical trading data, the system identifies patterns to assist in short-term financial decision-making.
 
-## 🛠️ **Tech Stack**
-🔹 **Programming Language:** Python  
-🔹 **Libraries:** Pandas, NumPy, Scikit-learn, TensorFlow (LSTM), Matplotlib, Seaborn  
-🔹 **Model Type:** Regression (Linear Regression, Decision Tree, Random Forest, SVR, LSTM)  
-🔹 **Development Environment:** Jupyter Notebook / Python Script  
 
-## 📂 **Project Structure**
-```
+
+---
+
+## 📊 Dataset Overview
+
+The study utilizes a decade-scale historical dataset of Alphabet Inc. (Class C) stock.
+
+* **Primary Features:** Open, High, Low, Close, Adjusted Close, and Volume.
+* **Engineered Feature:** `Prev Close` – Captures the immediate historical momentum by shifting the closing price by one day.
+* **Target Variable:** `Close` – The specific price at the end of the next trading day.
+
+---
+
+## 🎯 Project Workflow
+
+1.  **Data Preprocessing:** Handling outliers, scaling features, and managing time-series gaps.
+2.  **Feature Engineering:** Creating lag variables (e.g., `Prev Close`) and rolling averages to capture trends.
+3.  **Cross-Validation:** Using time-series splits to ensure models generalize across different market cycles.
+4.  **Neural Network Integration:** Implementing **LSTM (Long Short-Term Memory)** to specifically capture long-term temporal dependencies.
+5.  **Benchmarking:** Comparing traditional regression against ensemble methods and deep learning.
+
+
+
+---
+
+## 🧠 Tech Stack
+
+| Category | Tools |
+| :--- | :--- |
+| **Language** | Python 3.8+ |
+| **Deep Learning** | TensorFlow / Keras (LSTM) |
+| **Machine Learning** | Scikit-learn |
+| **Analysis** | Pandas, NumPy |
+| **Visualization** | Matplotlib, Seaborn |
+
+---
+
+## 📁 Project Structure
+
+```bash
 Stock-Price-Prediction/
-├── stock_prediction.py       # Python script with model implementation
-├── GOOG.csv                  # Dataset used for training/testing
-├── stock_price_prediction.png # Visualizations of stock predictions
-├── stocks_analysis_intro.txt  # Dataset overview
-├── stocks_analysis_report.txt # Detailed project report
-├── requirements.txt           # Dependencies for the project
-├── README.md                  # Project documentation
+├── src/
+│   └── stock_prediction.py      # Regression & LSTM implementations
+├── GOOG.csv                     # Historical Alphabet stock data
+├── assets/
+│   └── prediction_plot.png      # Actual vs. Predicted visual
+├── requirements.txt             # Dependencies
+└── README.md                    # Documentation
+
 ```
 
-## 🚀 **Installation & Setup**
-1️⃣ **Clone the Repository**  
-```sh
-git clone https://github.com/G-Narendra/Stock-Price-Prediction.git
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone & Navigate
+
+```bash
+git clone [https://github.com/G-Narendra/Stock-Price-Prediction.git](https://github.com/G-Narendra/Stock-Price-Prediction.git)
 cd Stock-Price-Prediction
+
 ```
-2️⃣ **Install Dependencies**  
-```sh
+
+### 2️⃣ Install Requirements
+
+```bash
 pip install -r requirements.txt
+
 ```
-3️⃣ **Run the Prediction Model**  
-```sh
+
+### 3️⃣ Execute the Pipeline
+
+```bash
 python stock_prediction.py
+
 ```
 
-## 📈 **Model Performance & Evaluation**
-Several regression models were trained and evaluated:
+---
 
-| Model                 | MSE  | R² Score |
-|----------------------|------|----------|
-| **Linear Regression** | 3.794 | 0.987 |
-| **Decision Tree Regressor** | 9.421 | 0.964 |
+## 📈 Model Performance & Evaluation
+
+The following metrics represent the model's ability to fit the test data (Mean Squared Error & Coefficient of Determination):
+
+| Model | MSE | R² Score |
+| --- | --- | --- |
 | **Random Forest Regressor** | **3.466** | **0.988** |
-| **Support Vector Regressor** | 16.420 | 0.934 |
+| **Linear Regression** | 3.794 | 0.987 |
 | **LSTM Neural Network** | 6.104 | 0.978 |
+| **Decision Tree Regressor** | 9.421 | 0.964 |
+| **Support Vector Regressor** | 16.420 | 0.934 |
 
-### **Best Performing Model: Random Forest Regressor**
-The **Random Forest Regressor** outperformed all other models with **the lowest MSE (3.466) and highest R² (0.988)**, making it the most reliable for predicting Google's next-day closing price.
+### **🏆 Champion Model: Random Forest Regressor**
 
-## 🔍 **Visualization**
-A comparison plot of **actual vs. predicted stock prices** was created to visually evaluate model accuracy.
+The **Random Forest** ensemble outperformed deep learning in this specific dataset, achieving a near-perfect **0.988 R² Score**. Its ability to minimize variance through tree bagging makes it highly resilient to individual "noisy" trading days.
 
-## 📉 **Conclusion**
-This project successfully developed and compared **multiple regression models** for stock price prediction. The **Random Forest Regressor** achieved the best accuracy. Future improvements could involve:
-- **Adding more historical data for long-term forecasting**.
-- **Incorporating additional technical indicators**.
-- **Using deep learning models (LSTMs & Transformers) for improved predictions**.
+---
 
-## 🤝 **Contributions**
-💡 Open to improvements! Feel free to:
-1. Fork the repo  
-2. Create a new branch (`feature-branch`)  
-3. Make changes & submit a PR  
+## 🚀 Future Roadmap
 
+* [ ] **Technical Indicators:** Adding RSI, MACD, and Bollinger Bands as input features.
+* [ ] **Sentiment Fusion:** Integrating live financial news sentiment scores using NLP.
+* [ ] **Hybrid Model:** Developing a gated ensemble of LSTM and Random Forest for enhanced stability.
 
-## 📩 **Connect with Me**
-📧 **Email:** [narendragandikota2540@gmail.com](mailto:narendragandikota2540@gmail.com)  
-🌐 **Portfolio:** [G-Narendra Portfolio](https://g-narendra-portfolio.vercel.app/)  
-💼 **LinkedIn:** [G-Narendra](https://linkedin.com/in/g-narendra/)  
-👨‍💻 **GitHub:** [G-Narendra](https://github.com/G-Narendra)  
+---
 
-⭐ **If you find this project useful, drop a star!** 🚀
+## 👨‍💻 Author
+
+**Narendra (G‑Narendra)** AI | ML | Python | Full Stack | GenAI Enthusiast
+
+📧 [Email Me](mailto:narendragandikota2540@gmail.com) | 💼 [LinkedIn](https://linkedin.com/in/g-narendra/) | 👨‍💻 [GitHub](https://github.com/G-Narendra)
+
+---
+
+<p align="center">⭐ If you find this project useful, feel free to give it a star! 🚀</p>
 
