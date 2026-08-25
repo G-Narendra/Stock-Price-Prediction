@@ -1,150 +1,91 @@
 # 📈 Stock Price Prediction
-### Time-Series Forecasting of Google (Alphabet Inc.) Stock Prices
 
-<p align="center">
-<img src="https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python">
-<img src="https://img.shields.io/badge/Scikit--Learn-Regression-F7931E?style=for-the-badge&logo=scikitlearn">
-<img src="https://img.shields.io/badge/TensorFlow-LSTM-FF6F00?style=for-the-badge&logo=tensorflow">
-<img src="https://img.shields.io/badge/R%C2%B2%20Score-0.988-brightgreen?style=for-the-badge">
-<img src="https://img.shields.io/badge/Dataset-GOOG%20Historical-4285F4?style=for-the-badge&logo=google">
-</p>
+**Time-series forecasting of stock prices using LSTM and traditional ML models.**
+
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+[![Scikit-Learn](https://img.shields.io/badge/scikit--learn-ML-F7931E.svg)](https://scikit-learn.org/)
+[![License MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ---
 
-## 🌟 Overview
+## 🎯 Problem Statement
 
-Predicting stock market trends is a complex challenge characterized by non-linearity and volatility. This project implements a high-precision **Machine Learning pipeline** to forecast **Google’s (GOOG) closing prices**. By analyzing years of historical trading data, the system identifies patterns to assist in short-term financial decision-making.
-
-
+Time-series forecasting of stock prices using LSTM and traditional ML models.
 
 ---
 
-## 📊 Dataset Overview
+## 📊 What I Built
 
-The study utilizes a decade-scale historical dataset of Alphabet Inc. (Class C) stock.
+Hybrid LSTM + Random Forest ensemble for stock price prediction with rolling window features.
 
-* **Primary Features:** Open, High, Low, Close, Adjusted Close, and Volume.
-* **Engineered Feature:** `Prev Close` – Captures the immediate historical momentum by shifting the closing price by one day.
-* **Target Variable:** `Close` – The specific price at the end of the next trading day.
+### Key Results
 
----
-
-## 🎯 Project Workflow
-
-1.  **Data Preprocessing:** Handling outliers, scaling features, and managing time-series gaps.
-2.  **Feature Engineering:** Creating lag variables (e.g., `Prev Close`) and rolling averages to capture trends.
-3.  **Cross-Validation:** Using time-series splits to ensure models generalize across different market cycles.
-4.  **Neural Network Integration:** Implementing **LSTM (Long Short-Term Memory)** to specifically capture long-term temporal dependencies.
-5.  **Benchmarking:** Comparing traditional regression against ensemble methods and deep learning.
-
-
+| Metric | Value |
+|---|---|
+| **Model** | LSTM + Random Forest |
+| **Train Size** | 70% |
+| **Test Size** | 30% |
+| **Evaluation** | r2_score, rmse |
 
 ---
 
-## 🧠 Tech Stack
+## 🛠️ Tech Stack
 
-| Category | Tools |
-| :--- | :--- |
+| Component | Technology |
+|---|---|
 | **Language** | Python 3.8+ |
-| **Deep Learning** | TensorFlow / Keras (LSTM) |
-| **Machine Learning** | Scikit-learn |
-| **Analysis** | Pandas, NumPy |
-| **Visualization** | Matplotlib, Seaborn |
+| **Data Processing** | Pandas |
+| **ML Framework** | Scikit-Learn |
+| **Model** | LSTM + Random Forest |
 
 ---
 
 ## 📁 Project Structure
 
-```bash
+```
 Stock-Price-Prediction/
-├── src/
-│   └── stock_prediction.py      # Regression & LSTM implementations
-├── GOOG.csv                     # Historical Alphabet stock data
-├── assets/
-│   └── prediction_plot.png      # Actual vs. Predicted visual
-├── requirements.txt             # Dependencies
-└── README.md                    # Documentation
-
+├── *.ipynb                          # Main notebook with full pipeline
+├── ml_evaluation_utils.py           # Evaluation utilities (CV, confidence intervals)
+├── README.md
+└── LICENSE
 ```
 
+---
 
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone & Navigate
+## 🔧 How to Run
 
 ```bash
-git clone [https://github.com/G-Narendra/Stock-Price-Prediction.git](https://github.com/G-Narendra/Stock-Price-Prediction.git)
-cd Stock-Price-Prediction
+# Install dependencies
+pip install pandas scikit-learn jupyter
 
-```
-
-### 2️⃣ Install Requirements
-
-```bash
-pip install -r requirements.txt
-
-```
-
-### 3️⃣ Execute the Pipeline
-
-```bash
-python stock_prediction.py
-
+# Run the notebook
+jupyter notebook *.ipynb
 ```
 
 ---
 
-## 📈 Model Performance & Evaluation
+## 🧪 Engineering Decisions
 
-The following metrics represent the model's ability to fit the test data (Mean Squared Error & Coefficient of Determination):
-
-| Model | MSE | R² Score |
-| --- | --- | --- |
-| **Random Forest Regressor** | **3.466** | **0.988** |
-| **Linear Regression** | 3.794 | 0.987 |
-| **LSTM Neural Network** | 6.104 | 0.978 |
-| **Decision Tree Regressor** | 9.421 | 0.964 |
-| **Support Vector Regressor** | 16.420 | 0.934 |
-
-### **🏆 Champion Model: Random Forest Regressor**
-
-The **Random Forest** ensemble outperformed deep learning in this specific dataset, achieving a near-perfect **0.988 R² Score**. Its ability to minimize variance through tree bagging makes it highly resilient to individual "noisy" trading days.
+| Decision | Rationale |
+|---|---|
+| **LSTM + Random Forest** | Chosen as baseline model for this problem type |
+| **70/30 Split** | Standard split ratio for small-medium datasets |
+| **Random State 2529** | Fixed random state ensures reproducibility |
 
 ---
 
-## 🚀 Future Roadmap
+## ⚠️ Limitations
 
-* [ ] **Technical Indicators:** Adding RSI, MACD, and Bollinger Bands as input features.
-* [ ] **Sentiment Fusion:** Integrating live financial news sentiment scores using NLP.
-* [ ] **Hybrid Model:** Developing a gated ensemble of LSTM and Random Forest for enhanced stability.
-
----
-
-## Engineering Decisions & Challenges Solved
-
-| Challenge | Decision | Why |
-|---|---|---|
-| Stock prices are non-stationary (trends change) | Rolling window normalization + lag features | Raw prices aren't stationary — rolling statistics capture local patterns the model can learn |
-| LSTM alone underperforms on noisy data | Hybrid ensemble: LSTM for temporal patterns + Random Forest for feature-based predictions | LSTM captures sequential dependencies; RF captures non-linear feature interactions — combining them improves robustness |
-| Future data leakage in time series | Strict temporal train/test split — no random shuffling | Random splits leak future information into training — temporal splits simulate real deployment conditions |
-| Single-stock results don't generalize | Multiple ticker evaluation with per-stock metrics | A model that works on Apple may fail on Tesla — evaluating across stocks tests generalization |
-
-## ML Engineering Decisions
-
-| Challenge | Decision | Why |
-|---|---|---|
-| Stock prices are non-stationary | Rolling window normalization + lag features | Raw prices aren't stationary — rolling statistics capture local patterns |
-| LSTM alone underperforms on noisy data | Hybrid ensemble: LSTM + Random Forest | LSTM captures temporal patterns; RF captures feature interactions — combining improves robustness |
-| Future data leakage in time series | Strict temporal train/test split | Random splits leak future info — temporal splits simulate real deployment |
-| Model needs early stopping | Added early stopping in training utilities | LSTM overfits without early stopping — patience-based stopping prevents this |
-
-## 👨‍💻 Author
-
-**Narendra (G‑Narendra)** AI | ML | Python | Full Stack | GenAI Enthusiast
-
-📧 [Email Me](mailto:narendragandikota2540@gmail.com) | 💼 [LinkedIn](https://linkedin.com/in/g-narendra/) | 👨‍💻 [GitHub](https://github.com/G-Narendra)
+- **No walk-forward validation**
+- **Look-ahead bias risk**
+- **No confidence intervals**
 
 ---
 
-<p align="center">⭐ If you find this project useful, feel free to give it a star! 🚀</p>
+## ⚠️ Disclaimer
 
+This is an educational project for learning ML concepts. It is not intended for production use.
+
+---
+
+*Built as part of MSc Data Science coursework — demonstrating fundamental ML pipeline.*
