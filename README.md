@@ -129,6 +129,15 @@ The **Random Forest** ensemble outperformed deep learning in this specific datas
 | Future data leakage in time series | Strict temporal train/test split — no random shuffling | Random splits leak future information into training — temporal splits simulate real deployment conditions |
 | Single-stock results don't generalize | Multiple ticker evaluation with per-stock metrics | A model that works on Apple may fail on Tesla — evaluating across stocks tests generalization |
 
+## ML Engineering Decisions
+
+| Challenge | Decision | Why |
+|---|---|---|
+| Stock prices are non-stationary | Rolling window normalization + lag features | Raw prices aren't stationary — rolling statistics capture local patterns |
+| LSTM alone underperforms on noisy data | Hybrid ensemble: LSTM + Random Forest | LSTM captures temporal patterns; RF captures feature interactions — combining improves robustness |
+| Future data leakage in time series | Strict temporal train/test split | Random splits leak future info — temporal splits simulate real deployment |
+| Model needs early stopping | Added early stopping in training utilities | LSTM overfits without early stopping — patience-based stopping prevents this |
+
 ## 👨‍💻 Author
 
 **Narendra (G‑Narendra)** AI | ML | Python | Full Stack | GenAI Enthusiast
